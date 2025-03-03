@@ -7,8 +7,6 @@ import { useRouter, usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import styles from "@/styles/components/MobileMenu.module.scss";
 
-import { useDetectClickOutside } from "react-detect-click-outside";
-
 type LinkType = {
   title: string;
   href: string;
@@ -25,23 +23,6 @@ function MobileMenu(props: MenuProps) {
   const pathname = usePathname();
 
   const [animationFinished, setAnimationFinished] = useState(false);
-
-  // Used for closing the menu on the click outside the menu itself
-  const ref = useDetectClickOutside({
-    onTriggered: (ctx: Event) => {
-      if (ctx.target) {
-        // Check if it is open already and if the click is not coming from the hamburger icon click which opens the menu
-        if (
-          props.open &&
-          !["hamburger", "line1", "line2", "line3"].includes(
-            (ctx.target as HTMLButtonElement).id
-          )
-        ) {
-          props.setOpen(false);
-        }
-      }
-    },
-  });
 
   // Values asigned to the mobile menu depending on its state
   const menuVariants = {
@@ -95,7 +76,6 @@ function MobileMenu(props: MenuProps) {
         transition={{ duration: 0.2, type: "tween" }}
         variants={menuVariants}
         className={styles.menu}
-        ref={ref}
       >
         {/* Map through all of the links, and put them as list elements in unordered list element (ul) */}
         <ul>
