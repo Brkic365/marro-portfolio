@@ -87,6 +87,7 @@
             position: absolute;
             bottom: 1rem;
             right: 2rem;
+            color: black;
         }
     }
 
@@ -96,7 +97,7 @@
         align-items: center;
         flex-direction: column;
         margin-bottom: 3rem;
-        
+
         .left {
             width: 80%;
             display: flex;
@@ -142,6 +143,7 @@
                  svg {
                     width: 1.1rem;
                     height: 1.1rem;
+                    color: black;
                  }
             }
         }
@@ -246,6 +248,7 @@
                     border: none;
                     outline: none;
                     border-bottom: 1px solid black;
+                    resize: none;
                 }
 
                 button {
