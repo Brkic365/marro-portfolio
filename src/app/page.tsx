@@ -1,95 +1,92 @@
+"use client"
+
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "@/styles/pages/Home.module.scss";
+import ThreeDCarousel from "./components/3DCarousel";
+import dynamic from 'next/dynamic'
+
+import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import { HiArrowUpRight, HiOutlineEnvelope, HiOutlinePhone } from "react-icons/hi2";
+import { IoLogoInstagram } from "react-icons/io";
+
+import ProjectsScroller from "./components/ProjectsScroller";
+
+const NoSSR3DCarousel = dynamic(() => import('./components/3DCarousel'), { ssr: false })
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <main className={styles.page}>
+      <section className={styles.about}>
+        <h1>about me</h1>
+        <section className={styles.content}>
+          <div className={styles.text}>
+            <p className={styles.p1}>A student photographer from Zagreb, Croatia, I specialize in black-and-white photography, capturing raw emotions and the beauty of light and shadow. Through my lens, I strive to tell meaningful stories and uncover the details often overlooked.</p>
+            <p className={styles.p2}>Photography and art have been my passion since childhood, shaping how I see the world. Whether exploring the streets of Zagreb.</p>
+            <button><p>View my projects</p><HiOutlineArrowNarrowRight /></button>
+          </div>
+          <div className={styles.image} />
+        </section>
+        <h5>est 2002</h5>
+      </section>
+      <section className={styles.services}>
+        <section className={styles.left}>
+          <h2>my services</h2>
+          <p>Whether {"it’s"} capturing the essence of
+            a corporate event, immortalizing a {"couple’s "}
+            special day, or collaborating on artistic projects.</p>
+        </section>
+        <section className={styles.right}>
+          <div className={styles.service}>
+            <h3>portraiture</h3>
+            <HiArrowUpRight />
+          </div>
+          <div className={styles.service}>
+            <h3>concerts</h3>
+            <HiArrowUpRight />
+          </div>
+          <div className={styles.service}>
+            <h3>family photos</h3>
+            <HiArrowUpRight />
+          </div>
+        </section>
+      </section>
+      <ProjectsScroller />
+      <section className={styles.contact}>
+        <section className={styles.title}>
+          <h1 className={styles.mainTitle}>
+            contact me
+          </h1>
+          <h1 className={styles.bgTopTitle}>{"let's"}</h1>
+          <h1 className={styles.bgBottomTitle}>{"work"}</h1>
+        </section>
+        <section className={styles.contactForm}>
+          <section className={styles.contactInfo}>
+            <div>
+              <HiOutlineEnvelope />
+              <p>booking@bymarro.com</p>
+            </div>
+            <div>
+              <HiOutlinePhone />
+              <p>+385 97 675 7675</p>
+            </div>
+            <div>
+              <IoLogoInstagram />
+              <p>@by.marro</p>
+            </div>
+          </section>
+          <form>
+            <section className={styles.twoInput}>
+              <input placeholder="Name" />
+              <input placeholder="Email" />
+            </section>
+            <textarea placeholder="Message" rows={10} />
+            <button>
+              <p>Submit</p>
+              <HiArrowUpRight />
+            </button>
+          </form>
+        </section>
+      </section>
+    </main>
   );
 }

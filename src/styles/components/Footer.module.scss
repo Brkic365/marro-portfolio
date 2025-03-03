@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+.footer {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    place-content: space-between;
+    padding: 1rem;
+    background-color: transparent;
+
+    .left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        
+        svg {
+            cursor: pointer;
+            width: 1.1rem;
+            height: 1.1rem;
+            color: rgba(0, 0, 0, 0.75);
+        }
+    }
+
+
+    p {
+        font-family: "Mulish", sans-serif;
+        font-size: 0.8rem;
+        line-height: 150%;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.75);
+    }
+}
