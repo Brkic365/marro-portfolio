@@ -4,6 +4,14 @@
 .page {
     background-color: #F2F2F2;
     padding: 3rem 0 5rem 0;
+    overflow-x: hidden;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
     .about {
         padding: 2rem;
@@ -13,6 +21,17 @@
         flex-direction: column;
 
         position: relative;
+
+        .circle {
+            background: rgba(169, 187, 178, 0.5);
+            border-radius: 50%;
+            width: 20rem;
+            height: 20rem;
+            position: absolute;
+            bottom: -5rem;
+            left: 40%;
+            z-index: 0;
+        }
 
         h1 {
             font-family: "Cinzel Decorative", sans-serif;
@@ -24,6 +43,8 @@
         .content {
             margin-top: 1rem;
             width: 80%;
+            max-width: 22rem;
+            position: relative;
             .text {
                 width: 100%;
                 p {
@@ -33,6 +54,7 @@
                     font-weight: 500;
                     color: black;
                     margin-bottom: 1rem;
+                    opacity: 0.8;
                 }
 
                 .p1 {
@@ -55,18 +77,38 @@
                     
                     cursor: pointer;
 
+                    &:hover {
+                        p {
+                            transform: scale(1.05);
+                        }
+                        svg {
+                            transform: translateX(25%);
+                        }
+                    }
+
+                    &:active {
+                        p {
+                            transform: scale(0.95);
+                        }
+                        svg {
+                            transform: translateX(-25%);
+                        }
+                    }
+
                     p {
                         margin-bottom: 0;
                         font-family: "Mulish", sans-serif;
                         font-size: 0.9rem;
                         line-height: 150%;
                         font-weight: 700;
+                        transition: transform 0.2s ease-in-out;
                     }
 
                     svg {
                         width: 0.9rem;
                         height: 0.9rem;
                         color: black;
+                        transition: transform 0.2s ease-in-out;
                     }
                 }
             }
@@ -75,24 +117,26 @@
                 margin-top: 1rem;
                 width: 100%;
                 height: 20rem;
-                background-image: url("/images/self-portrait.jpg");
+                background-image: url("/images/self-portrait.webp");
                 background-size: cover;
                 background-position: 50% 50%;
             }
-        }
 
-        h5 {
-            font-family: "Cinzel Decorative", sans-serif;
-            font-size: 1.5rem;
-            position: absolute;
-            bottom: 1rem;
-            right: 2rem;
-            color: black;
+            h5 {
+                font-family: "Cinzel Decorative", sans-serif;
+                font-size: 1.5rem;
+                position: absolute;
+                bottom: -1rem;
+                right: -2rem;
+                color: black;
+            }
         }
     }
 
     .services {
-        margin-top: 4rem;
+        z-index: 2;
+        position: relative;
+        margin-top: 6rem;
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -100,6 +144,7 @@
 
         .left {
             width: 80%;
+            max-width: 30rem;
             display: flex;
             align-items: center;
             flex-direction: column;
@@ -120,32 +165,88 @@
                 font-weight: 500;
                 color: black;
                 margin-bottom: 1rem;
+                opacity: 0.8;
             }
         }
 
         .right {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
             width: 90%;
             .service {
                 width: 100%;
+                max-width: 30rem;
                 display: flex;
                 align-items: center;
                 place-content: space-between;
-
                 padding: 1rem;
-
+                position: relative;
+                overflow: hidden;
+            
+                background-size: cover;
+                background-position: center;
+                transition: all 0.2s ease-in-out;
+                cursor: pointer;
+            
                 h3 {
                     font-family: "Cinzel Decorative", sans-serif;
                     font-size: 1.5rem;
                     font-weight: 400;
                     color: black;
+                    transition: color 0.2s ease-in-out;
+                    position: relative;
+                    z-index: 2; /* Ensures text stays above the background */
                 }
-
-                 svg {
+            
+                svg {
                     width: 1.1rem;
                     height: 1.1rem;
                     color: black;
-                 }
+                    transition: color 0.2s ease-in-out;
+                    position: relative;
+                    z-index: 2; /* Keeps icons above the background */
+                }
+            
+                /* Pseudo-element for smooth background transition */
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-size: cover;
+                    background-position: center;
+                    opacity: 0;
+                    transition: opacity 0.25s ease-in-out; /* Smooth transition */
+                    z-index: 1; /* Places the background behind text */
+                }
+            
+                &:hover::before {
+                    opacity: 1;
+                }
+            
+                &:hover h3,
+                &:hover svg {
+                    color: white;
+                }
             }
+            
+            /* Different backgrounds for each service */
+            .service:nth-child(1)::before {
+                background-image: url("/images/services/portraits/background.webp");
+            }
+            
+            .service:nth-child(2)::before {
+                background-image: url("/images/services/concerts/background.webp");
+            }
+            
+            .service:nth-child(3)::before {
+                background-image: url("/images/services/familyPhotos/background.webp");
+            }
+            
+            
         }
     }
     
@@ -154,7 +255,22 @@
         display: flex;
         align-items: center;
         flex-direction: column;
+        position: relative;
+        z-index: 1;
+
+        .circle {
+            background: rgba(169, 187, 178, 0.5);
+            border-radius: 50%;
+            width: 25rem;
+            height: 25rem;
+            position: absolute;
+            bottom: -5rem;
+            left: 30%;
+            z-index: 0;
+        }
+
         .title {
+            z-index: 1;
             position: relative;
             .mainTitle {
                 font-family: "Cinzel Decorative", sans-serif;
@@ -169,7 +285,6 @@
                 font-family: "Cinzel Decorative", sans-serif;
                 font-size: 4rem;
                 font-weight: 700;
-                color: black;
                 position: absolute;
                 top: -2.75rem;
                 left: -1rem;
@@ -180,7 +295,6 @@
                 font-family: "Cinzel Decorative", sans-serif;
                 font-size: 4rem;
                 font-weight: 700;
-                color: black;
                 position: absolute;
                 bottom: -2.75rem;
                 right: -1rem;
@@ -189,6 +303,7 @@
         }
 
         .contactForm {
+            z-index: 1;
             margin-top: 4rem;
             display: flex;
             align-items: center;
@@ -264,15 +379,321 @@
                     align-items: center;
                     justify-content: center;
                     gap: 1rem;
+
+                    cursor: pointer;
+                    transition: transform 0.2s ease-in-out;
+
+                    &:hover {
+                        transform: scale(1.05);
+                    }
+
+                    &:active {
+                        transform: scale(0.95);
+                    }
+
                     p {
                         font-family: "Mulish", sans-serif;
                     }
                     
-                     svg {
+                    svg {
 
-                     }
+                    }
                 }
             }
+        }
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .page {
+        .about {
+            h1 {
+                font-size: 5rem;
+            }
+    
+            .content {
+                margin-top: 1.5rem;
+                .image {
+                    height: 22rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .page {
+        .contact {
+            margin-top: 8rem;
+            .title {
+                .mainTitle {
+                    font-size: 3.5rem;
+                }
+    
+                .bgTopTitle {
+                    font-size: 7rem;
+                    top: -110%;
+                    left: -35%;
+                }
+    
+                .bgBottomTitle {
+                    font-size: 7rem;
+                    bottom: -110%;
+                    right: -35%;
+                }
+            }
+    
+            .contactForm {
+                margin-top: 5rem;
+                gap: 2rem;
+                width: 80%;
+                max-width: 40rem;
+                .contactInfo {
+                    width: 50%;
+                    gap: 1.25rem;
+                    padding-bottom: 2rem;
+                    div {
+                        gap: 0.75rem;
+                        svg {
+                            width: 1.25rem;
+                            height: 1.25rem;
+                        }
+    
+                        p {
+                            font-size: 1.1rem;
+                        }
+                    }
+                }
+    
+                form {
+                    gap: 1rem;
+                    .twoInput {
+                        flex-direction: row;
+                        gap: 1rem;
+                        input {
+                            padding: 0.75rem;
+                            font-size: 1rem;
+                        }
+                    }
+    
+                    textarea {
+                        padding: 0.75rem;
+                        font-size: 1rem;
+                    }
+    
+                    button {
+                        margin-top: 1.5rem;
+                        padding: 0.75rem;
+                        p {
+                            font-size: 1rem;
+                        }
+                        
+                         svg {
+                             width: 1.1rem;
+                             height: 1.1rem;
+                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .page {
+        .about {
+            h1 {
+                font-size: 6rem;
+            }
+    
+            .content {
+                margin-top: 1.5rem;
+                .image {
+                    height: 25rem;
+                }
+            }
+        }
+
+        .services {
+            margin-top: 10rem;
+            margin-bottom: 5rem;
+            gap: 2rem;
+    
+            .left {
+                h2 {
+                    font-size: 3rem;
+                }
+    
+                p {
+                    font-size: 1.1rem;
+                }
+            }
+    
+            .right {
+                .service {
+                    padding: 1.5rem;
+                
+                    h3 {
+                        font-size: 1.7rem;
+                    }
+                
+                    svg {
+                        width: 1.5rem;
+                        height: 1.5rem;
+                    }
+                }       
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .page {
+        .contact {
+            margin-top: 10rem;
+            .title {
+                .mainTitle {
+                    font-size: 5rem;
+                }
+    
+                .bgTopTitle {
+                    font-size: 10rem;
+                }
+    
+                .bgBottomTitle {
+                    font-size: 10rem;
+                }
+            }
+    
+            .contactForm {
+                margin-top: 7rem;
+                gap: 3rem;
+                .contactInfo {
+                    width: 100%;
+                    flex-direction: row;
+                    justify-content: center;
+                    gap: 2rem;
+                    padding-bottom: 3rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .page {
+        .about {
+            align-items: flex-start;
+            margin: 0 auto;
+            justify-content: center;
+            max-width: 60rem;
+            width: 80%;
+
+            h1 {
+                font-size: 6rem;
+            }
+    
+            .content {
+                max-width: 80rem;
+                width: 100%;
+                display: flex;
+                align-items: flex-end;
+                gap: 2rem;
+                margin-top: -4rem;
+
+                .text {
+                    width: 55rem;
+                    p {
+                        font-size: 1.1rem;
+                        margin-bottom: 3rem;
+                    }
+
+                    button {
+                        p {
+                            font-size: 1.1rem;
+                        }
+
+                        svg {
+                            width: 1.1rem;
+                            height: 1.1rem;
+                        }
+                    }
+                }
+
+                .image {
+                    width: 50rem;
+                    height: 25rem;
+                }
+
+                h5 {
+                    font-size: 2rem;
+                    bottom: -1.5rem;
+                    right: -4rem;
+                }
+            }
+        }
+
+        .services {
+            align-items: flex-start;
+            margin: 0 auto;
+            justify-content: center;
+            place-content: space-between;
+            max-width: 70rem;
+            width: 80%;
+            margin-top: 10rem;
+            margin-bottom: 5rem;
+
+            flex-direction: row;
+    
+            .left {
+                padding-top: 1rem;
+                width: 60%;
+                align-items: flex-start;
+                h2 {
+                    font-size: 3rem;
+                    text-align: left;
+                }
+    
+                p {
+                    font-size: 1.1rem;
+                    text-align: left;
+                }
+            }
+    
+            .right {
+                .service {
+                    padding: 1.5rem;
+                    max-width: 35rem;
+                
+                    h3 {
+                        font-size: 1.7rem;
+                    }
+                
+                    svg {
+                        width: 1.5rem;
+                        height: 1.5rem;
+                    }
+                }       
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .page {
+        .about {
+            h1 {
+                font-size: 7rem;
+            }
+    
+            .content {
+                gap: 2.5rem;
+                margin-top: -5rem;
+            }
+        }
+
+        .services {
+            margin-top: 15rem;
         }
     }
 }

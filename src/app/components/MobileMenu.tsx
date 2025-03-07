@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import styles from "@/styles/components/MobileMenu.module.scss";
 
@@ -19,36 +19,42 @@ interface MenuProps {
 }
 
 function MobileMenu(props: MenuProps) {
+
+  const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-
   const [animationFinished, setAnimationFinished] = useState(false);
 
-  // Values asigned to the mobile menu depending on its state
+  // Define pages where navbar is white, so mobile menu background should be #252525
+  const whiteNavPages = ["/services", "/concerts"];
+  const queries: any = {
+      "/portraits": ["7"]
+  }
+
+  const queryValue = searchParams.get("q");
+
+  const isWhiteNav = whiteNavPages.includes(pathname) || (queries[pathname] && queries[pathname].includes(queryValue));
+
+  const backgroundColor = isWhiteNav ? "#252525" : "#FFFFFF";
+  const textColor = isWhiteNav ? "#FFFFFF" : "#252525";
+
   const menuVariants = {
     open: { opacity: 1, height: "100%", display: "flex" },
     closed: { opacity: 0.5, height: "0%", display: "flex" },
   };
 
-  // Values asigned to the container depending on mobile menu open state
-  // If it is open, it will play the opening animation, else it will play closing or finished,
-  // Depending on the state of the closing animation
   const containerVariants = {
     open: { opacity: 1, display: "flex" },
     closing: { opacity: 0, display: "flex" },
     finished: { opacity: 0, display: "none" },
   };
 
-  // Used to turn off display on mobile menu after animation
-  // is finished so it doesn't finish instantly
   useEffect(() => {
     if (!props.open) {
       document.body.style.overflowY = "unset";
-
       const timeout = setTimeout(() => {
         setAnimationFinished(true);
       }, 300);
-
       return () => {
         clearTimeout(timeout);
       };
@@ -76,16 +82,14 @@ function MobileMenu(props: MenuProps) {
         transition={{ duration: 0.2, type: "tween" }}
         variants={menuVariants}
         className={styles.menu}
+        style={{ backgroundColor }}
       >
-        {/* Map through all of the links, and put them as list elements in unordered list element (ul) */}
         <ul>
-          {props.links.map((link, i) => {
-            return (
-              <li key={i}>
-                <Link href={link.href}>{link.title}</Link>
-              </li>
-            );
-          })}
+          {props.links.map((link, i) => (
+            <li key={i} onClick={() => props.setOpen(false)}>
+              <Link href={link.href} style={{ color: textColor }}>{link.title}</Link>
+            </li>
+          ))}
         </ul>
       </motion.section>
     </motion.main>

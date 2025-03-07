@@ -1,85 +1,75 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { motion } from "framer-motion";
+import MobileMenu from "./MobileMenu";
 import styles from "@/styles/components/Navbar.module.scss";
 
-import { motion } from "framer-motion";
-
-import MobileMenu from "./MobileMenu";
-
-import { useRouter } from "next/navigation";
-
-import { usePathname } from "next/navigation";
-
 function Navbar() {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  // State that handles opening and closing of the mobile menu
   const [openMenu, setOpenMenu] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Define pages where navbar is white, so mobile menu background should be #252525
+  const whiteNavPages = ["/services", "/concerts"];
+  const queries: any = {
+      "/portraits": ["7"]
+  }
+
+  const queryValue = searchParams.get("q");
+
+  const isWhiteNav = whiteNavPages.includes(pathname) || (queries[pathname] && queries[pathname].includes(queryValue));
+
+  const textColor = isWhiteNav ? "#FFFFFF" : "#252525";
+  const bgColor = isWhiteNav ? "black" : "#F2F2F2";
 
   const [links] = useState([
-    {
-      title: "about me",
-      href: "/#about",
-    },
-    {
-      title: "my services",
-      href: "/#services",
-    },
-    {
-      title: "my projects",
-      href: "/#projects",
-    },
-    {
-      title: "contact me",
-      href: "/#contact",
-    },
+    { title: "about me", href: "/#about" },
+    { title: "my services", href: "/#services" },
+    { title: "my projects", href: "/#projects" },
+    { title: "contact me", href: "/#contact" },
   ]);
 
-  // Values asigned to the top line of the hamburger menu used for rotation
-  const topLineVariants = {
-    open: { transform: "translateY(350%) rotateZ(45deg)" },
-    closed: { transform: "translateY(0%) rotateZ(0deg)" },
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= lastScrollY) {
+        setShowNavbar(false); // Hide navbar when scrolling down
+      } else {
+        setShowNavbar(true); // Show navbar when scrolling up
+      }
+      setLastScrollY(window.scrollY);
+    };
 
-  // Values asigned to the bottom line of the hamburger menu used for rotation
-  const bottomLineVariants = {
-    open: { transform: "translateY(-350%) rotateZ(-45deg)" },
-    closed: { transform: "translateY(0%) rotateZ(0deg)" },
-  };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   return (
-    <nav className={styles.nav}>
+    <nav className={`${styles.nav} ${showNavbar ? styles.show : styles.hide}`} style={{backgroundColor: lastScrollY > 150 ? bgColor : "transparent"}}>
       <MobileMenu
         open={openMenu}
         links={links}
-        setOpen={(open: any) => setOpenMenu(open)}
+        setOpen={(open) => setOpenMenu(open)}
       />
 
-      <section className={styles.logoHolder} onClick={() => router.push("/")}>
-        <h3>
-          marro
-        </h3>
+      <section
+        className={styles.logoHolder}
+        onClick={() => router.push("/")}
+      >
+        <h3 style={{ color: textColor }}>marro</h3>
       </section>
 
-      {/* Navbar links */}
       <ul className={styles.links}>
         {links.map((link) => {
-          // Check if the link is active
-          let active =
-            link.href === "/"
-              ? pathname === link.href
-              : pathname.includes(link.href);
-
+          let active = link.href === "/" ? pathname === link.href : pathname.includes(link.href);
           return (
-            <li
-              key={link.href}
-              className={active ? styles.active : styles.unactive}
-            >
-              <a href={link.href}>{link.title}</a>
+            <li key={link.href} className={active ? styles.active : styles.unactive}>
+              <a href={link.href} style={{ color: textColor }}>{link.title}</a>
             </li>
           );
         })}
@@ -94,20 +84,28 @@ function Navbar() {
           className={styles.line}
           animate={openMenu ? "open" : "closed"}
           transition={{ duration: 0.3, type: "tween" }}
-          variants={topLineVariants}
+          variants={{
+            open: { transform: "translateY(350%) rotateZ(45deg)" },
+            closed: { transform: "translateY(0%) rotateZ(0deg)" },
+          }}
           id="line1"
+          style={{ backgroundColor: textColor }}
         />
         <div
           className={styles.line}
-          style={openMenu ? { opacity: 0 } : undefined}
+          style={{ opacity: openMenu ? 0 : 1, backgroundColor: textColor }}
           id="line2"
         />
         <motion.div
           className={styles.line}
           animate={openMenu ? "open" : "closed"}
           transition={{ duration: 0.3, type: "tween" }}
-          variants={bottomLineVariants}
+          variants={{
+            open: { transform: "translateY(-350%) rotateZ(-45deg)" },
+            closed: { transform: "translateY(0%) rotateZ(0deg)" },
+          }}
           id="line3"
+          style={{ backgroundColor: textColor }}
         />
       </div>
     </nav>

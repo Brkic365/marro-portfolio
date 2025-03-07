@@ -11,12 +11,18 @@ import { IoLogoInstagram } from "react-icons/io";
 
 import ProjectsScroller from "./components/ProjectsScroller";
 
+import { useRouter } from "next/navigation";
+
 const NoSSR3DCarousel = dynamic(() => import('./components/3DCarousel'), { ssr: false })
 
 export default function Home() {
+
+  const router = useRouter();
+
   return (
     <main className={styles.page}>
-      <section className={styles.about}>
+      <section className={styles.about} id="about">
+        <div className={styles.circle} />
         <h1>about me</h1>
         <section className={styles.content}>
           <div className={styles.text}>
@@ -25,10 +31,10 @@ export default function Home() {
             <button><p>View my projects</p><HiOutlineArrowNarrowRight /></button>
           </div>
           <div className={styles.image} />
+          <h5>est 2002</h5>
         </section>
-        <h5>est 2002</h5>
       </section>
-      <section className={styles.services}>
+      <section className={styles.services} id="services">
         <section className={styles.left}>
           <h2>my services</h2>
           <p>Whether {"it’s"} capturing the essence of
@@ -36,22 +42,23 @@ export default function Home() {
             special day, or collaborating on artistic projects.</p>
         </section>
         <section className={styles.right}>
-          <div className={styles.service}>
+          <div className={styles.service} onClick={() => router.push("/services?q=portraits")}>
             <h3>portraiture</h3>
             <HiArrowUpRight />
           </div>
-          <div className={styles.service}>
+          <div className={styles.service} onClick={() => router.push("/services?q=concerts")}>
             <h3>concerts</h3>
             <HiArrowUpRight />
           </div>
-          <div className={styles.service}>
+          <div className={styles.service} onClick={() => router.push("/services?q=familyPhotos")}>
             <h3>family photos</h3>
             <HiArrowUpRight />
           </div>
         </section>
       </section>
       <ProjectsScroller />
-      <section className={styles.contact}>
+      <section className={styles.contact} id="contact">
+        <div className={styles.circle} />
         <section className={styles.title}>
           <h1 className={styles.mainTitle}>
             contact me
@@ -63,7 +70,7 @@ export default function Home() {
           <section className={styles.contactInfo}>
             <div>
               <HiOutlineEnvelope />
-              <p>booking@bymarro.com</p>
+              <p>booking@marro.com</p>
             </div>
             <div>
               <HiOutlinePhone />
@@ -79,7 +86,7 @@ export default function Home() {
               <input placeholder="Name" />
               <input placeholder="Email" />
             </section>
-            <textarea placeholder="Message" rows={10} />
+            <textarea placeholder="Message" rows={7} />
             <button>
               <p>Submit</p>
               <HiArrowUpRight />
