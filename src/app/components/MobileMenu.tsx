@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
@@ -71,6 +71,7 @@ function MobileMenu(props: MenuProps) {
   }, [pathname]);
 
   return (
+    <Suspense>
     <motion.main
       animate={props.open ? "open" : animationFinished ? "finished" : "closing"}
       transition={{ duration: 0.3, type: "tween" }}
@@ -93,6 +94,7 @@ function MobileMenu(props: MenuProps) {
         </ul>
       </motion.section>
     </motion.main>
+    </Suspense>
   );
 }
 

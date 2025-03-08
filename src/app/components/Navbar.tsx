@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import MobileMenu from "./MobileMenu";
@@ -50,6 +50,7 @@ function Navbar() {
   }, [lastScrollY]);
 
   return (
+    <Suspense>
     <nav className={`${styles.nav} ${showNavbar ? styles.show : styles.hide}`} style={{backgroundColor: lastScrollY > 150 ? bgColor : "transparent"}}>
       <MobileMenu
         open={openMenu}
@@ -109,6 +110,7 @@ function Navbar() {
         />
       </div>
     </nav>
+    </Suspense>
   );
 }
 

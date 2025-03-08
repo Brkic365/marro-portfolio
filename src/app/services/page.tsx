@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import styles from "@/styles/pages/Services.module.scss";
 import Service from "../components/Service";
 import { useSearchParams } from "next/navigation";
@@ -183,6 +183,7 @@ function Services() {
   if (!service) return null;
 
   return (
+    <Suspense>
     <main className={styles.services} style={{backgroundImage: `url("/images/services/${service.basePath}/${service.background}")`}}>
       <h1>{service.name}</h1>
       <section className={styles.servicesList}>
@@ -193,6 +194,7 @@ function Services() {
 
       <div className={styles.fadeEffect}/>
     </main>
+    </Suspense>
   );
 }
 
