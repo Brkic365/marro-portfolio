@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import styles from "@/styles/pages/Home.module.scss";
-import ThreeDCarousel from "./components/3DCarousel";
-import dynamic from 'next/dynamic'
+import { EmblaOptionsType } from 'embla-carousel'
 
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { HiArrowUpRight, HiOutlineEnvelope, HiOutlinePhone } from "react-icons/hi2";
@@ -13,7 +12,11 @@ import ProjectsScroller from "./components/ProjectsScroller";
 
 import { useRouter } from "next/navigation";
 
-const NoSSR3DCarousel = dynamic(() => import('./components/3DCarousel'), { ssr: false })
+import EmblaCarousel from "./components/3DCarousel"
+
+const OPTIONS: EmblaOptionsType = { loop: true }
+const SLIDE_COUNT = 7
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 export default function Home() {
 
@@ -21,6 +24,18 @@ export default function Home() {
 
   return (
     <main className={styles.page}>
+      <section className={styles.hero}>
+        <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+        <p className={styles.date}>Zagreb, 11:32 PM</p>
+        <section className={styles.info}>
+          <p>Student photographer from Zagreb, Croatia 
+          who specializes in B/W photography</p>
+          <section className={styles.personal}>
+            <h4>marija kolovrat</h4>
+            <p>studentica fotografije</p>
+          </section>
+        </section>
+      </section>
       <section className={styles.about} id="about">
         <div className={styles.circle} />
         <h1>about me</h1>

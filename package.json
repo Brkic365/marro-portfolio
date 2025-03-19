@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "embla-carousel-auto-scroll": "^8.5.2",
+    "embla-carousel-autoplay": "^8.5.2",
+    "embla-carousel-react": "^8.5.2",
     "framer-motion": "^12.4.10",
     "next": "15.1.6",
     "react": "^19.0.0",

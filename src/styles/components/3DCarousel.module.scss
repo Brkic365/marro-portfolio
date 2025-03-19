@@ -1,44 +1,53 @@
-// components/InsideWheelCarousel.module.scss
-.carouselContainer {
-    perspective: 1200px; // Creates the 3D space
-    width: 100%;
-    height: 100vh; // Full viewport height for immersion
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background: #000; // Dark background for better contrast
-  }
-  
-  .carousel {
-    position: relative;
-    width: 100%; // Base size, adjust as needed
-    height: 100%; // Base size, adjust as needed
-    transform-style: preserve-3d; // Maintain 3D transformations
-    animation: rotateCarousel 20s linear infinite; // Auto-rotate the carousel
-  }
-  
-  .carouselItem {
+.embla {
+  width: 100vw;
+  margin: auto;
+  padding-top: 10rem;
+  --slide-height: 15rem;
+  --slide-spacing: 1rem;
+  --slide-size: 20rem;
+
+  .topElipse, .bottomElipse {
+    clip-path: ellipse(50% 5% at 50% 50%);
+    width: 100vw;
+    height: 30rem;
+    background-color: #f2f2f2;
     position: absolute;
-    width: 200px; // Adjust based on your needs
-    height: 300px; // Taller images for a more immersive effect
-    transform-style: preserve-3d; // Maintain 3D transformations
-    backface-visibility: hidden; // Hide back-facing images
-    border-radius: 0px; // Optional: Rounded corners
-    overflow: hidden;
-  
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    z-index: 10;
+  }
+
+  .topElipse {
+    top: -2rem;
+  }
+
+  .bottomElipse {
+    top: 24rem;
+  }
+}
+.embla__viewport {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+.embla__slide {
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+
+  div {
+    width: 100%;
+    height: 26rem;
+    background-size: cover;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .embla {
+    .topElipse, .bottomElipse {
+      clip-path: ellipse(50% 15% at 50% 50%);
     }
   }
-  
-  @keyframes rotateCarousel {
-    from {
-      transform: rotateY(0deg);
-    }
-    to {
-      transform: rotateY(360deg);
-    }
-  }
+}

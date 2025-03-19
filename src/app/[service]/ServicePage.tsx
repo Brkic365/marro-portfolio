@@ -220,6 +220,7 @@ export default function ServicePage({ serviceParam }: {serviceParam: string}) {
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           display: "inline-block",
+          fontSize: `calc(100vw/${serviceProject.name.length})`
         }}
       >
         {serviceProject.name}

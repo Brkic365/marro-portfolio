@@ -13,6 +13,54 @@
         display: none;
     }
 
+    .hero {
+        height: 100vh;
+
+        p {
+            font-family: "Mulish", sans-serif;
+            font-size: 1rem;
+            line-height: 150%;
+            font-weight: 500;
+            color: black;
+            opacity: 0.8;
+        }
+
+        .date {
+            position: absolute;
+            z-index: 15;
+            top: 9rem;
+            right: 1.5rem;
+        }
+
+        .info {
+            position: absolute;
+            z-index: 15;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column-reverse;
+            gap: 1rem;
+
+            bottom: 4rem;
+            left: 2rem;
+
+            .personal {
+                h4 {
+                    font-family: "Cinzel Decorative", sans-serif;
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    color: black;
+                }
+
+                p {
+                    font-family: "Cinzel Decorative", sans-serif;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    color: black;
+                }
+            }
+        }
+    }
+
     .about {
         padding: 2rem;
 
@@ -501,6 +549,42 @@
 
 @media screen and (min-width: 800px) {
     .page {
+
+        .hero {
+            p {
+                font-size: 1.1rem;
+            }
+    
+            .info {
+                flex-direction: row;
+                place-content: space-between;
+                bottom: 6rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100%;
+                padding: 2rem;
+
+                p {
+                    width: 50%;
+                }
+    
+                .personal {
+                    display: flex;
+                    align-items: flex-end;
+                    gap: 0.5rem;
+                    flex-direction: column;
+                    h4 {
+                        font-size: 2rem;
+                    }
+    
+                    p {
+                        width: fit-content;
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+
         .about {
             h1 {
                 font-size: 6rem;
@@ -549,6 +633,17 @@
 
 @media screen and (min-width: 1000px) {
     .page {
+        .hero {
+            .date {
+                right: 10%;
+            }
+    
+            .info {
+                width: 80%;
+                padding: 0;
+            }
+        }
+
         .contact {
             margin-top: 10rem;
             .title {
