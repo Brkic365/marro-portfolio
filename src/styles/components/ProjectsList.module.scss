@@ -1,0 +1,252 @@
+.projectsScroller {
+    background-color: black;
+    width: 100%;
+    .projectHolder {
+        width: 100%;
+        .left {
+            background:
+            /* top, transparent black, faked with gradient */ 
+            linear-gradient(
+              rgba(0, 0, 0, 0.8), 
+              rgba(0, 0, 0, 0.8)
+            ),
+            /* bottom, image */
+            url("/images/projects/melankolija/thumb.webp");
+            background-size: cover;
+    
+            width: 100vw;
+            height: 40rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 20% 10%;
+    
+            .insideImages {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                overflow: visible;
+                height: 20rem;
+                width: 100%;
+                transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+                gap: 210%;
+    
+                .insideImage {
+                    background-size: cover;
+                    background-position: center;
+                    width: 100%;
+                    height: 70%;
+                    flex-shrink: 0;
+                    
+                    .overlay {
+                        position: absolute;
+                        inset: 0;
+                        background-color: rgba(0, 0, 0, 0.5);
+                        backdrop-filter: blur(2px);
+                        transition: opacity 1s ease-out;
+                    }
+                }
+            }
+        }
+    
+        .right {
+            .top {
+                display: none;
+            }
+    
+            .bottom {
+                cursor: pointer;
+                padding: 1rem;
+                padding-bottom: 2rem;
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column-reverse;
+                gap: 1rem;
+    
+                h1 {
+                    font-family: "Cinzel Decorative", sans-serif;
+                    font-size: 2rem;
+                    font-weight: 400;
+                    color: white;
+                }
+    
+                .viewMore {
+                    width: 100%;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    place-content: space-between;
+    
+                    font-family: "Cinzel Decorative", sans-serif;
+                    font-size: 1rem;
+                    font-weight: 400;
+    
+                    .line {
+                        display: none;
+                    }
+    
+                    svg {
+                        width: 1.1rem;
+                        height: 1.1rem;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+@media screen and (min-width: 600px) {
+    .projectsScroller .projectHolder {
+    
+        .right {
+            .bottom {
+                h1 {
+                    font-size: 3rem;
+                }
+    
+                .viewMore {
+                    font-size: 1.2rem;
+                    svg {
+                        width: 1.5rem;
+                        height: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .projectsScroller .projectHolder {
+    
+        .left {
+            padding: 15%;
+            .insideImages {
+                height: 30rem;
+                gap: 120%;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .projectsScroller {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;    
+
+        .projectHolder {
+            height: 105vh;
+            display: flex;
+            align-items: center;
+            .left {
+                height: 105vh;
+                width: 100%;
+            }
+        
+            .right {
+                width: 35%;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                place-content: space-between;
+                height: 100%;
+                padding: 1rem;
+                .top {
+                    width: 100%;
+                    display: flex;
+                    align-items: flex-start;
+                    place-content: space-between;
+                    color: white;
+    
+                    ul {
+                        margin-top: 1.5rem;
+                        list-style-type: none;
+    
+                        li {
+                            cursor: pointer;
+                            margin-bottom: 1rem;
+                            font-size: 1.2rem;
+                            font-family: 'Cinzel Decorative';
+                            opacity: 0.5;
+                            transition: opacity 0.2s ease-in-out;
+    
+                            &:hover {
+                                opacity: 1;
+                            }
+                        }
+                    }
+    
+                    h2 {
+                        font-size: 4rem;
+                        font-family: 'Cinzel Decorative';
+                    }
+                }
+        
+                .bottom {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    width: 100%;
+        
+                    h1 {
+                        font-size: 2.5rem;
+                    }
+        
+                    .viewMore {
+                        .line {
+                            display: block;
+                            width: 50%;
+                            height: 1px;
+                            background-color: white;
+                        }
+        
+                        svg {
+                            width: 1.1rem;
+                            height: 1.1rem;
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .projectsScroller .projectHolder {
+        .left {
+            width: 100%;
+
+            .insideImages {
+                height: 40rem;
+                gap: 73%;
+            }
+        }
+    
+        .right {
+            width: 40rem;
+            padding: 1.5rem;
+            .top {
+                ul {
+                    margin-top: 2rem;
+                    li {
+                        font-size: 1.25rem;
+                    }
+                }
+
+                h2 {
+                    font-size: 6rem;
+                }
+            }
+    
+            .bottom {
+                h1 {
+                    font-size: 3rem;
+                }
+            }
+        }
+    }
+}

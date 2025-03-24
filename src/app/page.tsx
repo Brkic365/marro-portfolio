@@ -9,6 +9,7 @@ import { HiArrowUpRight, HiOutlineEnvelope, HiOutlinePhone } from "react-icons/h
 import { IoLogoInstagram } from "react-icons/io";
 
 import ProjectsScroller from "./components/ProjectsScroller";
+import ProjectsList from "./components/ProjectsList";
 
 import { useRouter } from "next/navigation";
 
@@ -71,7 +72,7 @@ export default function Home() {
           </div>
         </section>
       </section>
-      <ProjectsScroller />
+      <ProjectsList />
       <section className={styles.contact} id="contact">
         <div className={styles.circle} />
         <section className={styles.title}>
